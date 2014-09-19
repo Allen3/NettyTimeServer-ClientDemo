@@ -51,8 +51,8 @@ public class HttpFileServer {
                         
                     });
             
-            ChannelFuture future = serverBootstrap.bind("192.168.19.22", port).sync();
-            System.out.println("HTTP file directory server lauch, address is : " + "http://192.168.19.22:" + port + url);
+            ChannelFuture future = serverBootstrap.bind("192.168.1.108", port).sync();
+            System.out.println("HTTP file directory server lauch, address is : " + "http://192.168.1.108:" + port + url);
             
             future.channel().closeFuture().sync();
             

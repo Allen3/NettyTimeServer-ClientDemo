@@ -12,10 +12,11 @@ package nettyhttpfileserverdemo;
  */
 public class NettyHttpFileServerDemo {
 
-    private static final String DEFAULT_URL = "/src/com/phei/netty";
+    private static final String DEFAULT_URL = "/src";
     
     /**
      * @param args the command line arguments
+     * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
         int port = 8080;
