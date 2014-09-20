@@ -65,7 +65,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
             return;
         }
         
-        if (request.getMethod() != GET) {
+        if (request.getMethod() != GET) {            
             sendError(ctx, METHOD_NOT_ALLOWED);
             return;
         }   
@@ -73,7 +73,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         final String uri = request.getUri();
         final String path = sanitizeUri(uri);
         
-        if (path == null) {
+        if (path == null) {            
             sendError(ctx, FORBIDDEN);
             return;
         }
@@ -84,7 +84,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
             return;
         }
         
-        if (file.isDirectory()) {
+        if (file.isDirectory()) {            
             if (uri.endsWith("/")) {
                 sendListing(ctx, file);
             } else {
@@ -154,9 +154,12 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         }
     }   //exceptionCaught()
         
-    private void sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {
-        FullHttpResponse reponse = new DefaultFullHttpResponse(HTTP_1_1, status, 
+    private void sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {        
+        FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, status, 
                 Unpooled.copiedBuffer("Failure: " + status.toString() + System.getProperty("line.separator"), CharsetUtil.UTF_8));
+        
+        response.headers().set(CONTENT_TYPE, "text/plain;    charset=UTF-8");
+        ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);        
     }   //sendError()
 
     private static final Pattern INSECURE_URI = Pattern.compile(".*[<>&\"].*");
@@ -171,12 +174,12 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
                 throw new Error();
             }   //try-catch
         }   //try-catch
-        
-        if (!uri.startsWith(url)) {
+                        
+        if (!uri.startsWith(url)) {            
             return null;
         }
         
-        if (!uri.startsWith("/")) {
+        if (!uri.startsWith("/")) {            
             return null;
         }
         
@@ -184,7 +187,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         
         if (uri.contains(File.separator + '.') || uri.contains('.' + File.separator) || 
                 uri.startsWith(".") || uri.endsWith(".") || 
-                INSECURE_URI.matcher(uri).matches()) {
+                INSECURE_URI.matcher(uri).matches()) {            
             return null;
         }
         
