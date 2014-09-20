@@ -26,6 +26,16 @@ Response consists of:
 
 
 
-##Problems
+##Issues and Solutions
 
-It seems that, the browser won't get the error information which should be sent back by the server when the illegal operation occurs(e.g. using `get `request method to access non existent file). No idea about the causes, the server or the browser.
+> It seems that, the browser won't get the error information which should be sent back by the server when the illegal operation occurs(e.g. using `get `request method to access non existent file). No idea about the causes, the server or the browser.
+
+> Alright, it's my own fault cause I forget to put the send-back codes in the `sendError()` method.
+
+----
+
+> When request to the server with correct URL or try to access the file which is okay to be accessed, the server still will send back an Error, sometimes.
+
+> I think it's because of the browser's behavior. Actually, when you send request to the server, especially for the first time, the browser will send a request automatically and implicitly to access the icon of the web, which is right after the request sent explicitly by user. And the request is using a HTTP `get` method, trying to get `/favicon.ico`.
+
+ 
