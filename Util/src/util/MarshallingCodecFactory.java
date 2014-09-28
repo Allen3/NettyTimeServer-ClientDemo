@@ -20,7 +20,7 @@ import org.jboss.marshalling.MarshallingConfiguration;
  *
  * @author allen
  */
-public final class MarshallingCodeCFactory {
+public final class MarshallingCodecFactory {
     
     /**
      *
