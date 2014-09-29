@@ -6,7 +6,7 @@
 
 package nettyjbossmarshallingserverdemo;
 
-import util.MarshallingCodecFactory;
+import util.MarshallingCodeCFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -43,8 +43,8 @@ public class SubReqServer {
 
                 @Override
                 protected void initChannel(SocketChannel c) throws Exception {
-                    c.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
-                    c.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
+                    c.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
+                    c.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
                     c.pipeline().addLast(new SubReqServerHandler());
                 }   //initChannel()
                         

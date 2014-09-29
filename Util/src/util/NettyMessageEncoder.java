@@ -10,6 +10,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageEncoder;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public final class NettyMessageEncoder extends MessageToMessageEncoder<NettyMess
 
     MarshallingEncoder marshallingEncoder;
 
-    public NettyMessageEncoder(MarshallingEncoder marshallingEncoder) {
+    public NettyMessageEncoder(MarshallingEncoder marshallingEncoder) throws IOException {
         this.marshallingEncoder = new MarshallingEncoder();
     }   //NettyMessageEncoder()        
     
@@ -62,7 +63,7 @@ public final class NettyMessageEncoder extends MessageToMessageEncoder<NettyMess
             sendBuf.writeInt(0);
         }
         
-        sendBuf.setInt(4, sendBuf.readableBytes());
+        sendBuf.setInt(4, sendBuf.readableBytes() - 8);
         
     }   //encode()
     
