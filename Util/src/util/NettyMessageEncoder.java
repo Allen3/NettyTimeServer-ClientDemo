@@ -22,8 +22,8 @@ public final class NettyMessageEncoder extends MessageToMessageEncoder<NettyMess
 
     MarshallingEncoder marshallingEncoder;
 
-    public NettyMessageEncoder(MarshallingEncoder marshallingEncoder) throws IOException {
-        this.marshallingEncoder = new MarshallingEncoder();
+    public NettyMessageEncoder() throws IOException {
+        marshallingEncoder = new MarshallingEncoder();
     }   //NettyMessageEncoder()        
     
     @Override
